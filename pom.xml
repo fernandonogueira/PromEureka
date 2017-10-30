@@ -5,7 +5,7 @@
 
     <groupId>promeureka</groupId>
     <artifactId>promeureka</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <description>Simple project that enables Prometheus to work with Eureka</description>
     <name>PromEureka</name>
