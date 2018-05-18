@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: PROMETHEUS-EUREKA
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
@@ -6,10 +10,7 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
-spring:
-  application:
-    name: PROMETHEUS-EUREKA
 
-prometheus:
-  jsonFolder: ${JSON_FILE_PATH:test}
-
+prom-eureka:
+  json-file:
+    path: ${JSON_FILE_PATH:/tmp}
