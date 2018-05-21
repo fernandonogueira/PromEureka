@@ -9,8 +9,9 @@ import org.springframework.cloud.client.discovery.DiscoveryClient
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import promeureka.config.AppConfig
-import promeureka.model.PrometheusFileSDItem
+import promeureka.model.PrometheusItem
 import promeureka.model.PrometheusLabel
+import java.io.File
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -24,9 +25,9 @@ open class EurekaPrometheusInstanceExposeWorker
     @Scheduled(fixedDelay = 60000, initialDelay = 20000)
     fun run() {
         val pairs = getInstancesByService(client)
-        val prometheusItems = getPrometheusItems(pairs)
+        val items = getPrometheusItems(pairs)
 
-        persist(prometheusItems)
+        persist(items)
     }
 
     private fun getInstancesByService(client: DiscoveryClient) = client
@@ -39,17 +40,19 @@ open class EurekaPrometheusInstanceExposeWorker
 
     private fun getPrometheusItems(pairs: List<Pair<String, List<ServiceInstance>>>?) = pairs
             ?.map { pair ->
-                PrometheusFileSDItem(
+                PrometheusItem(
                         PrometheusLabel(pair.first),
                         pair.second.map { instance -> "${instance.host}:${instance.port}" }
                 )
             }
 
-    private fun persist(items: List<PrometheusFileSDItem>?) {
+    private fun persist(items: List<PrometheusItem>?) {
         val json = mapper.writeValueAsString(items)
-        val destination = Paths.get("${config.getAbsoluteFileName()}/eureka-instances.json")
+        val destination = Paths.get(
+                "${config.getAbsoluteFileName()}${File.separatorChar}eureka-instances.json"
+        )
 
-        LOGGER.info("Converted JSON: {}", json)
+        LOGGER.info("JSON parsed: {}", json)
 
         Files.write(destination, json.toByteArray(StandardCharsets.UTF_8))
 
