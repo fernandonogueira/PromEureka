@@ -21,7 +21,7 @@ docker build -t fernandonogueira/promeureka:1.0.4 .
 
 docker run -p 127.0.0.1:8080:8080/tcp \
            -e EUREKA_SERVICE_URL=http://YOUR_EUREKA_ADDRESS \
-           -r JSON_FILE_PATH=/opt/prometheus_config/discovery \
+           -e JSON_FILE_PATH=/opt/prometheus_config/discovery \
            fernandonogueira/promeureka:1.0.4
 ```
 
