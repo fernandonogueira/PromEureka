@@ -1,7 +1,3 @@
 package promeureka.model
 
-class PrometheusLabel(job: String) {
-
-    var job: String? = job
-
-}
+data class PrometheusLabel(val job: String)

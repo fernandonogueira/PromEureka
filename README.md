@@ -1,16 +1,19 @@
 # PromEureka
-Simple Prometheus integration to work with Eureka using .json files
 
+Simple Prometheus integration to work with Eureka using `json` files.
 
 ### Running
 
-Just run the .jar adding EUREKA_SERVICE_URL and JSON_FILE_PATH environment vars.
+Just run the `jar` adding `EUREKA_SERVICE_URL` and `JSON_FILE_PATH` environment variables.
 
-e. g. 
-`java -DEUREKA_SERVICE_URL=http://YOUR_EUREKA_ADDRESS -DJSON_FILE_PATH=/opt/prometheus_config/discovery -jar prometheus-eureka-1.0.3.jar`
-
+For instance:
+ 
+```bash
+java -DEUREKA_SERVICE_URL=http://YOUR_EUREKA_ADDRESS -DJSON_FILE_PATH=/opt/prometheus_config/discovery -jar prometheus-eureka-1.0.4.jar
+```
 
 ### Sample Prometheus Configuration
+
 ```yaml
 # my global config
 global:
@@ -27,5 +30,5 @@ scrape_configs:
         refresh_interval: 5m
 ```
 
-Using this configuration, Prometheus will look for files ending with `.json` stored on the specified directory (`/opt/prometheus_config/discovery/`). 
-
+Using this configuration, Prometheus will look for files ending with `.json` stored on the 
+specified directory (`/opt/prometheus_config/discovery/`). 

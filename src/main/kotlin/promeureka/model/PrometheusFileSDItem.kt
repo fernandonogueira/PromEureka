@@ -1,10 +1,3 @@
 package promeureka.model
 
-class PrometheusFileSDItem {
-
-    var targets: List<String>? = null
-
-    var labels: PrometheusLabel? = null
-
-
-}
+data class PrometheusFileSDItem(val labels: PrometheusLabel, val targets: List<String>)
