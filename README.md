@@ -4,12 +4,25 @@ Simple Prometheus integration to work with Eureka using `json` files.
 
 ### Running
 
-Just run the `jar` adding `EUREKA_SERVICE_URL` and `JSON_FILE_PATH` environment variables.
+Run the `jar` adding `EUREKA_SERVICE_URL` and `JSON_FILE_PATH` environment variables.
 
 For instance:
- 
 ```bash
-java -DEUREKA_SERVICE_URL=http://YOUR_EUREKA_ADDRESS -DJSON_FILE_PATH=/opt/prometheus_config/discovery -jar prometheus-eureka-1.0.4.jar
+java -DEUREKA_SERVICE_URL=http://YOUR_EUREKA_ADDRESS \
+     -DJSON_FILE_PATH=/opt/prometheus_config/discovery \
+     -jar target/promeureka.jar
+```
+
+Or just create the docker container, and run it.
+
+For instance:
+```bash
+docker build -t fernandonogueira/promeureka:1.0.4 . 
+
+docker run -p 127.0.0.1:8080:8080/tcp \
+           -e EUREKA_SERVICE_URL=http://YOUR_EUREKA_ADDRESS \
+           -e JSON_FILE_PATH=/opt/prometheus_config/discovery \
+           fernandonogueira/promeureka:1.0.4
 ```
 
 ### Sample Prometheus Configuration
